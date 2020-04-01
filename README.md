@@ -1,2 +1,6 @@
-# recorder
-an app to record personal account and password
+# A simple react scaffolding
+
+# How to start
+
+* yarn install
+* npm run start
