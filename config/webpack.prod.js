@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const optimizeCss = require('optimize-css-assets-webpack-plugin');
 
 const config = {
+    devtool: 'cheap-module-source-map',
     plugins: [
         new optimizeCss({
             cssProcessor: require('cssnano'),

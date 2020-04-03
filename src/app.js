@@ -1,12 +1,19 @@
-import React from 'react';
-import {hot} from 'react-hot-loader/root';
-import styles from './app.scss';
-function App(){
+import React from 'react'
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      text: 'React Demo'
+    }
+  }
+  render() {
     return (
-        <div>
-            hello react
-        </div>
+      <div>
+        <p> {this.state.text} </p>
+      </div>
     )
+  }
 }
 
-export default hot(App);
+export default App
