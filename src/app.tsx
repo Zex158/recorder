@@ -1,19 +1,19 @@
-import React from 'react';
+import React from 'react'
 class App extends React.Component<any, any> {
   constructor(props: any) {
-    super(props);
+    super(props)
 
     this.state = {
       text: 'React Demo',
-    };
+    }
   }
-  render() {
+  render(): JSX.Element {
     return (
       <div>
         <p> {this.state.text} </p>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

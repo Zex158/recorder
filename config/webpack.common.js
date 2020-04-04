@@ -1,7 +1,7 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 function webpackCommonConfigCreator(options) {
   return {
@@ -119,7 +119,7 @@ function webpackCommonConfigCreator(options) {
         '@page': path.resolve(__dirname, '../src/pages'),
       },
     },
-  };
+  }
 }
 
-module.exports = webpackCommonConfigCreator;
+module.exports = webpackCommonConfigCreator

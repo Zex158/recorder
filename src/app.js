@@ -4,7 +4,7 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      text: 'React Demo'
+      text: 'React Demo',
     }
   }
   render() {

@@ -1,8 +1,8 @@
-const webpackConfigCreator = require('./webpack.common');
-const merge = require('webpack-merge');
-const path = require('path');
-const apiMocker = require('webpack-api-mocker');
-const port = process.env.port;
+const webpackConfigCreator = require('./webpack.common')
+const merge = require('webpack-merge')
+const path = require('path')
+const apiMocker = require('webpack-api-mocker')
+const port = process.env.port
 const config = {
   devtool: 'cheap-module-eval-source-map',
   devServer: {
@@ -11,13 +11,13 @@ const config = {
     inline: true,
     port: port,
     before(app) {
-      apiMocker(app, path.resolve(__dirname, '../mock/index.js'));
+      apiMocker(app, path.resolve(__dirname, '../mock/index.js'))
     },
   },
-};
+}
 
 const options = {
   mode: 'development',
-};
+}
 
-module.exports = merge(webpackConfigCreator(options), config);
+module.exports = merge(webpackConfigCreator(options), config)

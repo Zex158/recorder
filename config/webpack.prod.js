@@ -1,6 +1,6 @@
-const webpackConfigCreator = require('./webpack.common');
-const merge = require('webpack-merge');
-const optimizeCss = require('optimize-css-assets-webpack-plugin');
+const webpackConfigCreator = require('./webpack.common')
+const merge = require('webpack-merge')
+const optimizeCss = require('optimize-css-assets-webpack-plugin')
 
 const config = {
   devtool: 'cheap-module-source-map',
@@ -15,10 +15,10 @@ const config = {
       canPrint: true,
     }),
   ],
-};
+}
 
 const options = {
   mode: 'production',
-};
+}
 
-module.exports = merge(webpackConfigCreator(options), config);
+module.exports = merge(webpackConfigCreator(options), config)

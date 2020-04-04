@@ -1,9 +1,8 @@
-const example = require('./example');
-
-const useProxy = process.env.proxy == 'true';
-const proxyUrl = process.env.proxyUrl;
-let proxy = {};
-console.log(useProxy, proxy);
+const example = require('./example')
+const useProxy = process.env.proxy == 'true'
+const proxyUrl = process.env.proxyUrl
+let proxy = {}
+console.log(useProxy, proxy)
 if (useProxy) {
   proxy = {
     _proxy: {
@@ -13,11 +12,11 @@ if (useProxy) {
       },
       changeHost: false,
     },
-  };
+  }
 } else {
   proxy = {
     ...example,
-  };
+  }
 }
 
-module.exports = proxy;
+module.exports = proxy
