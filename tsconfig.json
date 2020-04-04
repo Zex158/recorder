@@ -3,6 +3,10 @@
     "target": "es2018",
     "module": "es2015",
     "jsx": "preserve",
+    "lib": [
+      "dom",
+      "es2018"
+    ],
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -10,9 +14,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": [
-    "node_modules",
-    "lib",
-    "es"
+  "include": [
+    "src"
   ]
 }

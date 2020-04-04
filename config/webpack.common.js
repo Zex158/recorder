@@ -1,7 +1,7 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 function webpackCommonConfigCreator(options) {
   return {
@@ -13,6 +13,18 @@ function webpackCommonConfigCreator(options) {
     },
     module: {
       rules: [
+        {
+          enforce: 'pre',
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          include: path.resolve(__dirname, '../src'),
+          loader: 'eslint-loader',
+          options: {
+            emitWarning: true,
+            emitError: true,
+            fix: true, // 是否自动修复
+          },
+        },
         {
           test: /\.(js|jsx)$/,
           include: path.resolve(__dirname, '../src'),
@@ -29,7 +41,16 @@ function webpackCommonConfigCreator(options) {
         {
           test: /\.tsx?$/,
           include: path.resolve(__dirname, '../src'),
-          loaders: ['babel-loader', 'ts-loader'],
+          use: [
+            {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env', '@babel/preset-react'],
+                plugins: ['@babel/plugin-transform-runtime'],
+              },
+            },
+            'ts-loader',
+          ],
         },
         {
           test: /\.(css|scss)$/,
@@ -86,16 +107,19 @@ function webpackCommonConfigCreator(options) {
         template: path.resolve(__dirname, '../public/index.html'),
       }),
       new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: [
-          path.resolve(process.cwd(), 'build/'),
-          path.resolve(process.cwd(), 'dist/'),
-        ],
+        cleanOnceBeforeBuildPatterns: [path.resolve(process.cwd(), 'build/'), path.resolve(process.cwd(), 'dist/')],
       }),
       new ExtractTextPlugin({
         filename: 'css/[name][hash].css',
       }),
     ],
-  }
+    resolve: {
+      extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      alias: {
+        '@page': path.resolve(__dirname, '../src/pages'),
+      },
+    },
+  };
 }
 
-module.exports = webpackCommonConfigCreator
+module.exports = webpackCommonConfigCreator;
