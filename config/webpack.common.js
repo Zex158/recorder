@@ -3,13 +3,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+const resolve = (pathName) => path.resolve(process.cwd(), pathName)
+
 function webpackCommonConfigCreator(options) {
   return {
     mode: options.mode,
     entry: ['@babel/polyfill', './src/index.js'],
     output: {
       filename: 'js/bundle.js',
-      path: path.resolve(__dirname, '../build'),
+      path: resolve('../build'),
     },
     module: {
       rules: [
@@ -17,7 +19,7 @@ function webpackCommonConfigCreator(options) {
           enforce: 'pre',
           test: /\.tsx?$/,
           exclude: /node_modules/,
-          include: path.resolve(__dirname, '../src'),
+          include: resolve('src'),
           loader: 'eslint-loader',
           options: {
             emitWarning: true,
@@ -27,7 +29,7 @@ function webpackCommonConfigCreator(options) {
         },
         {
           test: /\.(js|jsx)$/,
-          include: path.resolve(__dirname, '../src'),
+          include: resolve('src'),
           use: [
             {
               loader: 'babel-loader',
@@ -40,7 +42,7 @@ function webpackCommonConfigCreator(options) {
         },
         {
           test: /\.tsx?$/,
-          include: path.resolve(__dirname, '../src'),
+          include: resolve('src'),
           use: [
             {
               loader: 'babel-loader',
@@ -54,7 +56,7 @@ function webpackCommonConfigCreator(options) {
         },
         {
           test: /\.(css|scss)$/,
-          include: path.resolve(__dirname, '../src'),
+          include: resolve('src'),
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
             use: [
@@ -104,10 +106,10 @@ function webpackCommonConfigCreator(options) {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, '../public/index.html'),
+        template: resolve('public/index.html'),
       }),
       new CleanWebpackPlugin({
-        cleanOnceBeforeBuildPatterns: [path.resolve(process.cwd(), 'build/'), path.resolve(process.cwd(), 'dist/')],
+        cleanOnceBeforeBuildPatterns: [resolve('build/'), resolve('dist/')],
       }),
       new ExtractTextPlugin({
         filename: 'css/[name][hash].css',
@@ -116,7 +118,14 @@ function webpackCommonConfigCreator(options) {
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       alias: {
-        '@page': path.resolve(__dirname, '../src/pages'),
+        '@page': resolve('src/pages'),
+        '@component': resolve('src/components'),
+        '@container': resolve('src/containers'),
+        '@layout': resolve('src/layouts'),
+        '@locale': resolve('src/locales'),
+        '@route': resolve('src/routes'),
+        '@service': resolve('src/service'),
+        '@type': resolve('src/types'),
       },
     },
   }

@@ -7,6 +7,33 @@
       "dom",
       "es2018"
     ],
+    "baseUrl": "./",
+    "paths": {
+      "@page/*": [
+        "src/pages/*"
+      ],
+      "@component/*": [
+        "src/components/*"
+      ],
+      "@container/*": [
+        "src/containers/*"
+      ],
+      "@layout/*": [
+        "src/layouts/*"
+      ],
+      "@locale/*": [
+        "src/locales/*"
+      ],
+      "@route/*": [
+        "src/routes/*"
+      ],
+      "@service/*": [
+        "src/service/*"
+      ],
+      "@type/*": [
+        "src/types/*"
+      ]
+    },
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,

@@ -38,6 +38,6 @@ module.exports = {
     ],
     'no-extra-semi': 0, // 禁止不必要的分号
     quotes: ['error', 'single'], // 强制使用单引号
-    'no-unused-vars': 0, // 不允许未定义的变量
+    'no-unused-vars': 2, // 不允许未定义的变量
   },
 }
