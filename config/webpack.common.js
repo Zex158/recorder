@@ -8,7 +8,7 @@ const resolve = (pathName) => path.resolve(process.cwd(), pathName)
 function webpackCommonConfigCreator(options) {
   return {
     mode: options.mode,
-    entry: ['@babel/polyfill', './src/index.tsx'],
+    entry: ['@babel/polyfill', './src/App.tsx'],
     output: {
       filename: 'js/bundle.js',
       path: resolve('build'),
@@ -46,9 +46,12 @@ function webpackCommonConfigCreator(options) {
           use: [
             {
               loader: 'babel-loader',
-              options: {
+              query: {
                 presets: ['@babel/preset-env', '@babel/preset-react'],
-                plugins: ['@babel/plugin-transform-runtime'],
+                plugins: [
+                  '@babel/plugin-transform-runtime',
+                  ['import', { libraryName: 'antd', style: 'css' }], // antd按需加载
+                ],
               },
             },
             'ts-loader',
@@ -85,6 +88,20 @@ function webpackCommonConfigCreator(options) {
               },
             ],
           }),
+        },
+        {
+          //antd样式处理
+          test: /\.css$/,
+          include: resolve('node_modules/antd/lib'),
+          use: [
+            { loader: 'style-loader' },
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1,
+              },
+            },
+          ],
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
