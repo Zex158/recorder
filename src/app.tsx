@@ -1,4 +1,5 @@
 import React from 'react'
+import Style from './app.scss'
 class App extends React.Component<any, any> {
   constructor(props: any) {
     super(props)
@@ -9,8 +10,8 @@ class App extends React.Component<any, any> {
   }
   render(): JSX.Element {
     return (
-      <div>
-        <p> {this.state.text} </p>
+      <div className={Style.a}>
+        <p className={Style.b}> {this.state.text} </p>
       </div>
     )
   }
