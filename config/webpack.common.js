@@ -8,10 +8,10 @@ const resolve = (pathName) => path.resolve(process.cwd(), pathName)
 function webpackCommonConfigCreator(options) {
   return {
     mode: options.mode,
-    entry: ['@babel/polyfill', './src/index.js'],
+    entry: ['@babel/polyfill', './src/index.tsx'],
     output: {
       filename: 'js/bundle.js',
-      path: resolve('../build'),
+      path: resolve('build'),
     },
     module: {
       rules: [
@@ -118,14 +118,7 @@ function webpackCommonConfigCreator(options) {
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
       alias: {
-        '@page': resolve('src/pages'),
-        '@component': resolve('src/components'),
-        '@container': resolve('src/containers'),
-        '@layout': resolve('src/layouts'),
-        '@locale': resolve('src/locales'),
-        '@route': resolve('src/routes'),
-        '@service': resolve('src/service'),
-        '@type': resolve('src/types'),
+        '@': resolve('src/'),
       },
     },
   }
