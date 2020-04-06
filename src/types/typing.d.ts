@@ -13,3 +13,6 @@ declare module '*.tiff'
 interface Window {
   devToolsExtension?: () => {}
 }
+declare interface IAxiosCustomConfig {
+  showLoading: boolean
+}

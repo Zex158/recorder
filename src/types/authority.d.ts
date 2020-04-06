@@ -9,16 +9,10 @@ declare interface IModule {
   isLeaf: boolean
   subModules?: IModule[]
 }
-declare enum ILoginType {
-  notLogin,
-  originLogin,
-  thirdPartyLogin,
-}
 
 declare interface IAuthorityState {
   logined: boolean
-  loginType: ILoginType
+  loginType: 0 | 1 | 2
   loginFrom: string | null
-  userInfo: IUserInfo | null
-  modules: IModule[] | null
+  userId: string
 }

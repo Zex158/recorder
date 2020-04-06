@@ -8,7 +8,7 @@ const resolve = (pathName) => path.resolve(process.cwd(), pathName)
 function webpackCommonConfigCreator(options) {
   return {
     mode: options.mode,
-    entry: ['@babel/polyfill', './src/App.tsx'],
+    entry: ['@babel/polyfill', './src/Index.tsx'],
     output: {
       filename: 'js/bundle.js',
       path: resolve('build'),

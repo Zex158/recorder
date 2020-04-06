@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, Component } from 'react'
+/* import React, { ChangeEventHandler, Component } from 'react'
 import { connect } from 'react-redux'
 import { setLoginAction } from '@/actions/authority/authority'
 
@@ -18,8 +18,7 @@ type Iprops = IStateProps & IDispatchProps
 
 class Edit extends Component<Iprops> {
   onCheckChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const loginState = e.target.checked
-      ? {
+    const loginState = e.target.checked ? {
           logined: true,
           loginType: 1,
           loginFrom: 'app',
@@ -28,10 +27,16 @@ class Edit extends Component<Iprops> {
           logined: false,
         }
     console.log(this.props)
-    this.props.setLoginAction({
-      ...this.props.authority,
-      ...loginState,
-    })
+    this.props.setLoginAction(
+      e.target.checked,
+      e.target.checked ? {
+            logined: true,
+            loginFrom: null,
+            userId: '',
+            loginType: 0,
+          }
+        : undefined,
+    )
   }
   save = () => {
     console.log(this.state)
@@ -49,3 +54,4 @@ class Edit extends Component<Iprops> {
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(Edit)
+ */
