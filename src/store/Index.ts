@@ -3,10 +3,12 @@ import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import history from './History'
 
+import reducers from '@/reducers/index'
+
 const middleware = routerMiddleware(history)
-console.log(process.env.NODE_ENV)
 const store = createStore(
   combineReducers({
+    ...reducers,
     router: connectRouter(history),
   }),
   process.env.NODE_ENV === 'development'

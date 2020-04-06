@@ -1,4 +1,5 @@
 import React from 'react'
+import Edit from '@/components/tes/editor'
 class App extends React.Component<any, any> {
   constructor(props: any) {
     super(props)
@@ -10,6 +11,7 @@ class App extends React.Component<any, any> {
   render(): JSX.Element {
     return (
       <div>
+        <Edit></Edit>
         <p> {this.state.text} </p>
       </div>
     )

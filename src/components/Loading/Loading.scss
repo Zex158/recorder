@@ -1,0 +1,80 @@
+$dotRadius: 5px;
+$dotColor: $primary;
+
+$prefix: eui-;
+
+.#{$prefix}loading-container {
+  position: relative;
+
+  >.#{$prefix}loading {
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /**
+ * eui-loading-mask
+ * eui-loading-container下的遮罩层
+ */
+  >.#{$prefix}loading-mask {
+    z-index: 10;
+    @include makeMask();
+  }
+}
+
+/**
+ * eui-loading
+ * 控制loading动画
+ * $dotRadius,$dotColor 定义于loading/_variable.scss中
+ */
+.#{$prefix}loading {
+  &-box {
+    display: flex;
+
+    .#{$prefix}loading-dot {
+      width: $dotRadius * 2;
+      height: $dotRadius * 2;
+      border-radius: $dotRadius;
+      background-color: $dotColor;
+
+      &-left {
+        transform: translateX(-100%);
+        animation: left-swing 0.5s ease-in alternate infinite;
+      }
+
+      &-right {
+        transform: translateX(0);
+        animation: right-swing 0.5s ease-out alternate infinite;
+      }
+    }
+  }
+
+  &-text {
+    color: $dotColor;
+  }
+}
+
+@keyframes left-swing {
+
+  50%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes right-swing {
+  50% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
