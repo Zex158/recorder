@@ -34,9 +34,9 @@ module.exports = {
         error: null,
         message: null,
         data: {
-          logined: true,
-          userId: 'z5sqwDSw2aTz201',
-          loginType: 'local',
+          logined: false,
+          userId: null,
+          loginType: null,
           loginFrom: null,
         },
       },

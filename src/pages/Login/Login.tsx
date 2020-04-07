@@ -37,7 +37,7 @@ class Login extends React.Component<any, any> {
   }
   render(): JSX.Element {
     return (
-      <>
+      <Layout>
         <Header>Login</Header>
         <Content className={Style['form-container']}>
           <Row justify="center" className={Style['form-wrapper']}>
@@ -76,7 +76,7 @@ class Login extends React.Component<any, any> {
           </Row>
         </Content>
         <Footer>aa</Footer>
-      </>
+      </Layout>
     )
   }
 }

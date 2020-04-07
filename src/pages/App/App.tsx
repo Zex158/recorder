@@ -8,7 +8,7 @@ class App extends React.Component<any, any> {
     }
   }
   render(): JSX.Element {
-    return <div></div>
+    return <div>app</div>
   }
 }
 
