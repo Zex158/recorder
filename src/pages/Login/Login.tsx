@@ -2,9 +2,26 @@ import React from 'react'
 import { Layout } from 'antd'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { Row, Col } from 'antd'
-
 import Style from './Login.scss'
+import { connect } from 'react-redux'
+import { setLoginAction } from '@/actions/authority/authority'
+import { push } from 'connected-react-router'
+import { message } from 'antd'
 
+const mapStateToProps = (states: IStoreState) => ({
+  authority: states.authority,
+})
+
+type IStateProps = ReturnType<typeof mapStateToProps>
+
+const mapDispathToProps = (dispatch: any) => ({
+  setLoginAction: (logined: boolean, authority: any) => dispatch(setLoginAction(logined, authority)),
+  login: () => dispatch(push('/app')),
+})
+
+type IDispatchProps = ReturnType<typeof mapDispathToProps>
+
+type Iprops = IStateProps & IDispatchProps
 const { Header, Footer, Content } = Layout
 
 const layout = {
@@ -15,7 +32,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 }
 
-class Login extends React.Component<any, any> {
+class Login extends React.Component<Iprops, any> {
   constructor(props: any) {
     super(props)
 
@@ -33,11 +50,18 @@ class Login extends React.Component<any, any> {
     console.log('Failed:', errorInfo)
   }
   login = () => {
-    console.log('login with ', this.state)
+    this.props.setLoginAction(true, {
+      logined: true,
+      loginFrom: null,
+      userId: '12312',
+      loginType: 0,
+    })
+    this.props.login()
+    message.success('logined success !')
   }
   render(): JSX.Element {
     return (
-      <Layout>
+      <Layout style={{ minHeight: '100%' }}>
         <Header>Login</Header>
         <Content className={Style['form-container']}>
           <Row justify="center" className={Style['form-wrapper']}>
@@ -67,7 +91,7 @@ class Login extends React.Component<any, any> {
                 </Form.Item>
 
                 <Form.Item {...tailLayout}>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" onClick={this.login}>
                     Submit
                   </Button>
                 </Form.Item>
@@ -75,10 +99,10 @@ class Login extends React.Component<any, any> {
             </Col>
           </Row>
         </Content>
-        <Footer>aa</Footer>
+        <Footer></Footer>
       </Layout>
     )
   }
 }
 
-export default Login
+export default connect(mapStateToProps, mapDispathToProps)(Login)

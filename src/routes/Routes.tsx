@@ -1,44 +1,47 @@
 import React from 'react'
 import { Route } from 'react-router'
-import { Provider } from 'react-redux'
-import { ConnectedRouter } from 'connected-react-router'
+import { connect } from 'react-redux'
 import App from '@/pages/App/App'
 import Login from '@/pages/Login/Login'
-import store from '@/store/Index'
-import history from '@/store/History'
-import { initAuthentication } from '@/actions/authority/authority'
 import { push } from 'connected-react-router'
-class Routes extends React.Component<any, any> {
-  state = {
-    authentication: this.props.authentication,
-  }
+import history from '@/store/History'
+const mapStateToProps = (states: IStoreState) => ({
+  authority: states.authority,
+})
 
+const mapDispatchToProps = (dispatch: any) => ({
+  redirect: (url: string, params?: any) => dispatch(push(url)),
+})
+
+type IStateProps = ReturnType<typeof mapStateToProps>
+type IDispatchProps = ReturnType<typeof mapDispatchToProps>
+type Iprops = IStateProps & IDispatchProps
+class Routes extends React.Component<Iprops, any> {
   componentDidMount() {
-    store.dispatch(initAuthentication(this.props.authentication))
-
-    if (!this.props.authentication.logined) {
-      store.dispatch(push('/login'))
+    if (!this.props.authority.logined) {
+      this.props.redirect('/login')
     }
 
     history.listen((location, action) => {
-      if (location.pathname !== '/login' && !this.props.authentication.logined) {
-        store.dispatch(push('/login'))
+      if (location.pathname !== '/login' && !this.props.authority.logined) {
+        push('/login')
       }
     })
   }
   render() {
     return (
-      <Provider store={store}>
-        <ConnectedRouter history={history}>
-          {this.props.authentication.logined ? (
+      <>
+        {this.props.authority.logined ? (
+          <>
             <Route exact path="/" component={App} />
-          ) : (
-            <Route path="/login" component={Login} />
-          )}
-        </ConnectedRouter>
-      </Provider>
+            <Route exact path="/app" component={App} />
+          </>
+        ) : (
+          <Route path="/login" component={Login} />
+        )}
+      </>
     )
   }
 }
 
-export default Routes
+export default connect(mapStateToProps, mapDispatchToProps)(Routes)
