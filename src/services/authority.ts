@@ -1,4 +1,4 @@
-import { get } from '@/utils/request'
+import { get, post } from '@/utils/request'
 
 export const authenticate = async (config?: any) => {
   return await get('/api/authentication', config)
@@ -14,4 +14,8 @@ export const getCurrentUserModule = async (config?: any) => {
 
 export const getCurrentUserTrace = async (config?: any) => {
   return await get('/api/currentUser/trace', config)
+}
+
+export const login = async (config?: any) => {
+  return await post('/api/login', config)
 }

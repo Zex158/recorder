@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { setLoginAction } from '@/actions/authority/authority'
 import { push } from 'connected-react-router'
 import { message } from 'antd'
+import { login } from '@/services/authority'
 
 const mapStateToProps = (states: IStoreState) => ({
   authority: states.authority,
@@ -16,7 +17,7 @@ type IStateProps = ReturnType<typeof mapStateToProps>
 
 const mapDispathToProps = (dispatch: any) => ({
   setLoginAction: (logined: boolean, authority: any) => dispatch(setLoginAction(logined, authority)),
-  login: () => dispatch(push('/app')),
+  loginSuccess: () => dispatch(push('/app')),
 })
 
 type IDispatchProps = ReturnType<typeof mapDispathToProps>
@@ -44,20 +45,19 @@ class Login extends React.Component<Iprops, any> {
     this.login = this.login.bind(this)
   }
   onFinished = (values: any) => {
-    console.log('Success:', values)
+    this.login(values)
   }
   onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
   }
-  login = () => {
-    this.props.setLoginAction(true, {
-      logined: true,
-      loginFrom: null,
-      userId: '12312',
-      loginType: 0,
-    })
-    this.props.login()
-    message.success('logined success !')
+  login = async (params: any) => {
+    const [error, loginResult] = await login({ config: { ...params } })
+
+    if (!error && loginResult.success) {
+      let { authority, currentUser, trace, userModule } = loginResult.data
+      this.props.setLoginAction(true, authority)
+      this.props.loginSuccess()
+    }
   }
   render(): JSX.Element {
     return (
@@ -91,7 +91,7 @@ class Login extends React.Component<Iprops, any> {
                 </Form.Item>
 
                 <Form.Item {...tailLayout}>
-                  <Button type="primary" htmlType="submit" onClick={this.login}>
+                  <Button type="primary" htmlType="submit">
                     Submit
                   </Button>
                 </Form.Item>

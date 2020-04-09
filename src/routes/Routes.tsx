@@ -3,7 +3,7 @@ import { Route } from 'react-router'
 import { connect } from 'react-redux'
 import App from '@/pages/App/App'
 import Login from '@/pages/Login/Login'
-import { push } from 'connected-react-router'
+import { push, goBack } from 'connected-react-router'
 import history from '@/store/History'
 const mapStateToProps = (states: IStoreState) => ({
   authority: states.authority,
@@ -24,7 +24,9 @@ class Routes extends React.Component<Iprops, any> {
 
     history.listen((location, action) => {
       if (location.pathname !== '/login' && !this.props.authority.logined) {
-        push('/login')
+        this.props.redirect('/login')
+      } else if (this.props.authority.logined && location.pathname === '/login') {
+        this.props.redirect('/app')
       }
     })
   }

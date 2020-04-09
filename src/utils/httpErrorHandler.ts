@@ -7,7 +7,7 @@ export const init = () => {
       if (response.data.success) {
         return response.data
       } else {
-        message.error(response.data.error, 0)
+        message.error(response.data.error, 5)
       }
     },
     (error) => {

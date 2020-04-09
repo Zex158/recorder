@@ -1,4 +1,5 @@
 import React from 'react'
+import { Result } from 'antd'
 class App extends React.Component<any, any> {
   constructor(props: any) {
     super(props)
@@ -8,7 +9,7 @@ class App extends React.Component<any, any> {
     }
   }
   render(): JSX.Element {
-    return <div>app</div>
+    return <Result status="success" title="Successfully Logined" subTitle="Welcome" />
   }
 }
 

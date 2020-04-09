@@ -33,14 +33,44 @@ module.exports = {
         success: true,
         error: null,
         message: null,
-        data: {
-          logined: false,
-          userId: null,
-          loginType: null,
-          loginFrom: null,
-        },
+        data: {},
       },
       200,
     )
+  },
+  'POST /api/login': (req, res) => {
+    console.log(req)
+    if (req.body.username === 'admin' && req.body.password === '123456') {
+      res.send({
+        success: true,
+        error: null,
+        data: {
+          currentUser: {
+            role: {
+              roleType: 1,
+              roleName: 'admin',
+              privaceVersion: '0.0.1',
+            },
+            userName: 'admin',
+          },
+          authority: {
+            logined: true,
+            userId: 'qwcxzasdas',
+            loginType: 1,
+            loginFrom: 'local',
+          },
+          trace: {
+            lastLoginStatus: 'success',
+            lastLoginIp: '174.1.0.152',
+          },
+          userModules: {},
+        },
+      })
+    } else {
+      res.send({
+        success: false,
+        error: 'Invalid Password',
+      })
+    }
   },
 }
