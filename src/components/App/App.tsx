@@ -7,6 +7,7 @@ import Routes from '@/routes/Routes'
 import { init } from '@/utils/httpErrorHandler'
 import { initApp } from './initApp'
 import { initAuthentication } from '@/actions/authority/authority'
+import { setCurrentUser } from '@/actions/authority/currentUser'
 
 class App extends React.Component<any, any> {
   state = {
@@ -19,10 +20,10 @@ class App extends React.Component<any, any> {
 
   async componentDidMount() {
     init()
-
     await initApp(this.saveAppData, this.saveUserData)
-
+    store.dispatch(setCurrentUser(this.cache.currentUser || null))
     store.dispatch(initAuthentication(this.cache.authentication))
+    this.setState({ init: true })
   }
   saveAppData = (data: any) => {
     this.saveData(data)
@@ -48,9 +49,7 @@ class App extends React.Component<any, any> {
   render() {
     return (
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Routes />
-        </ConnectedRouter>
+        <ConnectedRouter history={history}>{this.state.init ? <Routes /> : 'loading'}</ConnectedRouter>
       </Provider>
     )
   }

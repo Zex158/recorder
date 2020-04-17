@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router'
 import { connect } from 'react-redux'
-import App from '@/pages/App/App'
+import MainPage from '@/pages/Main/Main'
 import Login from '@/pages/Login/Login'
 import { push, goBack } from 'connected-react-router'
 import history from '@/store/History'
@@ -20,13 +20,15 @@ class Routes extends React.Component<Iprops, any> {
   componentDidMount() {
     if (!this.props.authority.logined) {
       this.props.redirect('/login')
+    } else {
+      this.props.redirect('/record/list')
     }
 
     history.listen((location, action) => {
       if (location.pathname !== '/login' && !this.props.authority.logined) {
         this.props.redirect('/login')
       } else if (this.props.authority.logined && location.pathname === '/login') {
-        this.props.redirect('/app')
+        this.props.redirect('/record/list')
       }
     })
   }
@@ -35,8 +37,7 @@ class Routes extends React.Component<Iprops, any> {
       <>
         {this.props.authority.logined ? (
           <>
-            <Route exact path="/" component={App} />
-            <Route exact path="/app" component={App} />
+            <Route exact path="/record/list" component={MainPage} />
           </>
         ) : (
           <Route path="/login" component={Login} />

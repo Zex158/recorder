@@ -10,6 +10,7 @@ module.exports = {
         privaceVersion: '0.0.1',
       },
       userName: 'admin',
+      userId: 'asdasd',
     },
   },
   'GET /api/currentUserModule': {
@@ -33,7 +34,12 @@ module.exports = {
         success: true,
         error: null,
         message: null,
-        data: {},
+        data: {
+          logined: true,
+          userId: 'qwcxzasdas',
+          loginType: 1,
+          loginFrom: 'local',
+        },
       },
       200,
     )
@@ -52,6 +58,7 @@ module.exports = {
               privaceVersion: '0.0.1',
             },
             userName: 'admin',
+            userId: 'aaa',
           },
           authority: {
             logined: true,
