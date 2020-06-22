@@ -17,7 +17,7 @@ type IStateProps = ReturnType<typeof mapStateToProps>
 
 const mapDispathToProps = (dispatch: any) => ({
   setLoginAction: (logined: boolean, authority: any) => dispatch(setLoginAction(logined, authority)),
-  loginSuccess: () => dispatch(push('/app')),
+  loginSuccess: () => dispatch(push('/main/list')),
 })
 
 type IDispatchProps = ReturnType<typeof mapDispathToProps>

@@ -6,31 +6,27 @@ import { NavLink } from 'react-router-dom'
 import { Layout, Menu, Breadcrumb } from 'antd'
 import List from '@/components/List/List'
 
-const { Header, Content, Footer, Sider } = Layout
-const { SubMenu } = Menu
-
-const mapStateToProps = (states: IStoreState) => ({
-  authority: states.authority,
-  currentUser: states.currentUser,
-})
+const mapStateToProps = (states: IStoreState) => ({})
 
 type IStateProps = ReturnType<typeof mapStateToProps>
 
 const mapDispathToProps = (dispatch: any) => ({
-  loginSuccess: () => dispatch(push('/app')),
+  linkTo: (url: string) => dispatch(push(url)),
 })
 
 type IDispatchProps = ReturnType<typeof mapDispathToProps>
 
 type Iprops = IStateProps & IDispatchProps
+const { Header, Content, Footer, Sider } = Layout
+const { SubMenu } = Menu
 
-class MainPage extends React.Component<Iprops, any> {
+class MainPage extends React.Component<any, any> {
   state = {
     collapsed: false,
   }
   render(): JSX.Element {
     return (
-      <Layout>
+      <Layout style={{ height: '100%' }}>
         <Layout>
           <Content>
             <Route exact path="/main/list" component={List} />
@@ -38,8 +34,8 @@ class MainPage extends React.Component<Iprops, any> {
           </Content>
         </Layout>
         <Footer>
-          <NavLink to="/main/list"></NavLink>
-          <NavLink to="/main/profile"></NavLink>
+          <a onClick={() => this.props.linkTo('/main/list')}>List</a>
+          <a onClick={() => this.props.linkTo('/main/profile')}>Profile</a>
         </Footer>
       </Layout>
     )

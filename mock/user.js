@@ -35,7 +35,7 @@ module.exports = {
         error: null,
         message: null,
         data: {
-          logined: true,
+          logined: false,
           userId: 'qwcxzasdas',
           loginType: 1,
           loginFrom: 'local',

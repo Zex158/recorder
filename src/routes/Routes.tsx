@@ -1,10 +1,11 @@
 import React from 'react'
-import { Route } from 'react-router'
+import { Route, Router } from 'react-router'
 import { connect } from 'react-redux'
 import MainPage from '@/pages/Main/Main'
 import Login from '@/pages/Login/Login'
 import { push, goBack } from 'connected-react-router'
 import history from '@/store/History'
+import MainRouter from '@/routes/Main'
 const mapStateToProps = (states: IStoreState) => ({
   authority: states.authority,
 })
@@ -21,7 +22,7 @@ class Routes extends React.Component<Iprops, any> {
     if (!this.props.authority.logined) {
       this.props.redirect('/login')
     } else {
-      this.props.redirect('/record/list')
+      this.props.redirect('/main/list')
     }
 
     history.listen((location, action) => {
@@ -37,7 +38,9 @@ class Routes extends React.Component<Iprops, any> {
       <>
         {this.props.authority.logined ? (
           <>
-            <Route exact path="/record/list" component={MainPage} />
+            <Route path="/">
+              <MainRouter />
+            </Route>
           </>
         ) : (
           <Route path="/login" component={Login} />
